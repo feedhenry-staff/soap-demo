@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns="http://wfm.feedhenry.com/1.0" targetNamespace="http://wfm.feedhenry.com/1.0"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wfm.feedhenry.com/1.0"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"  >
+  <wsdl:types>
+    <schema elementFormDefault="qualified"
+      targetNamespace="http://wfm.feedhenry.com/1.0" xmlns="http://www.w3.org/2001/XMLSchema">
+       <complexType name="categoriesRequest">
+          <sequence>
+            <element name="categoryType" nillable="true" type="xsd:int" />
+          </sequence>
+      </complexType>
+      <complexType name="ArrayOf_Responses">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="1" name="category" type="impl:ResponseVO" />
+        </sequence>
+      </complexType>
+
+      <complexType name="ResponseVO">
+          <sequence>
+            <element name="catId" nillable="true" type="xsd:int" />
+            <element name="catLabel" nillable="false" type="xsd:string" />
+            <element name="parentId" nillable="false" type="xsd:int" />
+            <element name="routeId" nillable="false" type="xsd:int" />
+            <element name="type" nillable="false" type="xsd:string" />
+            <element name="createdById" nillable="false" type="xsd:int" />
+            <element name="createdByName" nillable="false" type="xsd:string" />
+            <element name="createdDate" nillable="false" type="xsd:string" />
+            <element name="origId" nillable="false" type="xsd:int" />
+            <element name="shortDescription" nillable="false" type="xsd:string" />
+            <element name="longDescription" nillable="false" type="xsd:string" />
+            <element name="iconImg" nillable="false" type="xsd:string" />
+            <element name="sortOrder" nillable="false" type="xsd:int" />
+          </sequence>
+       </complexType>
+       <element name="getCategoriesResponse">
+        <complexType>
+          <sequence>
+            <element name="categories" nillable="false" type="impl:ArrayOf_Responses" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="getCategoriesRequest">
+        <complexType>
+          <sequence>
+            <element name="categoriesRequest" nillable="false" type="impl:categoriesRequest" />
+          </sequence>
+        </complexType>
+       </element>
+    </schema>
+  </wsdl:types>
+  
+  <wsdl:message name="getCategoriesRequest">
+    <wsdl:part element="impl:getCategoriesRequest" name="getCategoriesRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="getCategoriesResponse">
+    <wsdl:part element="impl:getCategoriesResponse" name="getCategoriesResponse" />
+  </wsdl:message>
+
+  <wsdl:portType name="dataDictionary_PortType">
+    <wsdl:operation name="getCategories">
+      <wsdl:input message="impl:getCategoriesRequest" name="getCategoriesRequest" />
+      <wsdl:output message="impl:getCategoriesResponse" name="getCategoriesResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="dataDictionary_Binding"  type="tns:dataDictionary_PortType" >
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getCategories"> 
+      <wsdl:input name="getCategoriesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getCategoriesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="soapServices">
+    <wsdl:port binding="impl:dataDictionary_Binding"
+      name="dataDictionary">
+      <soap:address location="http://localhost:8001/ws/DataManager" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

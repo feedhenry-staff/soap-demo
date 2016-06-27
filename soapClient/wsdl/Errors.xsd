@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gbe="urn:errors.ws.globalbay.com" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:errors.ws.globalbay.com">
+    <xsd:simpleType name="ErrorCode">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ACCESS_DENIED"/>
+            <xsd:enumeration value="CONFIGURATION_ERROR"/>
+            <xsd:enumeration value="INTERNAL_ERROR"/>
+            <xsd:enumeration value="INVALID_CREDENTIALS"/>
+            <xsd:enumeration value="INVALID_OBJECT"/>
+            <xsd:enumeration value="INVALID_OBJECT_ID"/>
+            <xsd:enumeration value="INVALID_OBJECT_TYPE"/>
+            <xsd:enumeration value="INVALID_RECORD"/>
+            <xsd:enumeration value="INVALID_SESSION_ID"/>
+            <xsd:enumeration value="MARSHALLING_ERROR"/>
+            <xsd:enumeration value="OBJECT_NOT_FOUND"/>
+            <xsd:enumeration value="RECORD_NOT_FOUND"/>
+            <xsd:enumeration value="SESSION_IN_USE"/>
+            <xsd:enumeration value="COMMUNICATION_ERROR"/>
+            <xsd:enumeration value="UNEXPECTED_ERROR"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="GenericError">
+        <xsd:sequence>
+            <xsd:element name="errorCode" type="gbe:ErrorCode"/>
+            <xsd:element name="errorMessage" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="LoginError">
+        <xsd:complexContent>
+            <xsd:extension base="gbe:GenericError"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="LoginError" type="gbe:LoginError"/>
+    <xsd:complexType name="AccessDeniedError">
+        <xsd:complexContent>
+            <xsd:extension base="gbe:GenericError"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="AccessDeniedError" type="gbe:AccessDeniedError"/>
+    <xsd:complexType name="NotFoundError">
+        <xsd:complexContent>
+            <xsd:extension base="gbe:GenericError"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="NotFoundError" type="gbe:NotFoundError"/>
+    <xsd:complexType name="InvalidDataError">
+        <xsd:complexContent>
+            <xsd:extension base="gbe:GenericError"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="InvalidDataError" type="gbe:InvalidDataError"/>
+    <xsd:complexType name="InternalError">
+        <xsd:complexContent>
+            <xsd:extension base="gbe:GenericError"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="InternalError" type="gbe:InternalError"/>
+</xsd:schema>

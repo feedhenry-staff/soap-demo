@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns="http://wfm.feedhenry.com/1.0" targetNamespace="http://wfm.feedhenry.com/1.0"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wfm.feedhenry.com/1.0"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"  >
+
+  <wsdl:types>
+    <schema elementFormDefault="qualified"
+      targetNamespace="http://wfm.feedhenry.com/1.0" xmlns="http://www.w3.org/2001/XMLSchema">
+       <element name="createWORequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" nillable="false" name="WorkOrderImpl" type="impl:WorkOrderImpl" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="createWOResponse">
+        <complexType>
+          <sequence>
+            <element name="FHGuid" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="updateWORequest">
+        <complexType>
+          <sequence>
+            <element name="FHGuid"  minOccurs="1" nillable="false" type="xsd:string" />
+           <element minOccurs="1" nillable="false" name="WorkOrderImpl" type="impl:WorkOrderImpl" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="updateWOResponse">
+        <complexType>
+          <sequence>
+            <element name="result"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+      </element>
+       <element name="deleteWORequest">
+        <complexType>
+          <sequence>
+            <element name="FHGuid"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="deleteWOResponse">
+        <complexType>
+          <sequence>
+            <element name="result"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+
+       <element name="createStandingDataTypeRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" nillable="false" name="standingDataType" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="createStandingDataTypeResponse">
+        <complexType>
+          <sequence>
+            <element name="FHGuid" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="updateStandingDataTypeRequest">
+        <complexType>
+          <sequence>
+            <element name="FHGuid"  minOccurs="1" nillable="false" type="xsd:string" />
+            <element minOccurs="1" nillable="false" name="standingDataType" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="updateStandingDataTypeResponse">
+        <complexType>
+          <sequence>
+            <element name="result"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+      </element>
+       <element name="deleteStandingDataTypeRequest">
+        <complexType>
+          <sequence>
+            <element name="FHGuid"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="deleteStandingDataTypeResponse">
+        <complexType>
+          <sequence>
+            <element name="result"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+
+       <element name="createStandingDataRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" nillable="false" name="standingDataId" type="xsd:int" />
+            <element minOccurs="1" nillable="false" name="standingDataLabel" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="createStandingDataResponse">
+        <complexType>
+          <sequence>
+            <element name="FHGuid" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="updateStandingDataRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" nillable="false" name="standingDataId" type="xsd:int" />
+            <element minOccurs="1" nillable="false" name="standingDataLabel" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="updateStandingDataResponse">
+        <complexType>
+          <sequence>
+            <element name="result"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+      </element>
+       <element name="deleteStandingDataRequest">
+        <complexType>
+          <sequence>
+            <element name="FHGuid"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+       <element name="deleteStandingDataResponse">
+        <complexType>
+          <sequence>
+            <element name="result"  minOccurs="1" nillable="false" type="xsd:string" />
+          </sequence>
+        </complexType>
+       </element>
+
+      <complexType name="JobVO">
+        <sequence>
+          <element name="LocationId" nillable="false" type="xsd:string" />
+          <element name="JobType" nillable="false" type="xsd:string" />
+          <element name="Address1" nillable="false" type="xsd:string" />
+          <element name="Address2" nillable="false" type="xsd:string" />
+          <element name="Address3" nillable="true" type="xsd:string" />
+          <element name="County" nillable="false" type="xsd:string" />
+          <element name="PostCode" nillable="false" type="xsd:string" />
+          <element name="Phone" nillable="false" type="xsd:string" />
+          <element name="Lng" nillable="false" type="xsd:string" />
+          <element name="lat" nillable="false" type="xsd:string" />
+          <element name="Notes" nillable="true" type="xsd:string" />
+        </sequence>
+      </complexType>
+      <complexType name="ArrayOf_JobsVO">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="Job" type="impl:JobVO" />
+        </sequence>
+      </complexType>
+      <complexType name="WorkOrderImpl">
+          <sequence>
+            <element name="WOID"  minOccurs="1" nillable="false" type="xsd:string" />
+            <element name="userId" nillable="false" type="xsd:string" />
+            <element name="timestamp" nillable="false" type="xsd:dateTime" />
+            <element name="startDate" nillable="false" type="xsd:dateTime" />
+            <element name="jobCode" nillable="false" type="xsd:string" />
+            <element name="listOfJobs" nillable="false" type="impl:ArrayOf_JobsVO" />
+          </sequence>
+        </complexType>
+    </schema>
+  </wsdl:types>
+  
+  <wsdl:message name="createWORequest">
+    <wsdl:part element="impl:createWORequest" name="createWORequest" />
+  </wsdl:message>
+
+  <wsdl:message name="createWOResponse">
+    <wsdl:part element="impl:createWOResponse" name="createWOResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="updateWORequest">
+    <wsdl:part element="impl:updateWORequest" name="updateWORequest" />
+  </wsdl:message>
+
+  <wsdl:message name="updateWOResponse">
+    <wsdl:part element="impl:updateWOResponse" name="updateWOResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="deleteWORequest">
+    <wsdl:part element="impl:deleteWORequest" name="deleteWORequest" />
+  </wsdl:message>
+
+  <wsdl:message name="deleteWOResponse">
+    <wsdl:part element="impl:deleteWOResponse" name="deleteWOResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="createStandingDataTypeRequest">
+    <wsdl:part element="impl:createStandingDataTypeRequest" name="createStandingDataTypeRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="createStandingDataTypeResponse">
+    <wsdl:part element="impl:createStandingDataTypeResponse" name="createStandingDataTypeResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="updateStandingDataTypeRequest">
+    <wsdl:part element="impl:updateStandingDataTypeRequest" name="updateStandingDataTypeRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="updateStandingDataTypeResponse">
+    <wsdl:part element="impl:updateStandingDataTypeResponse" name="updateStandingDataTypeResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="deleteStandingDataTypeRequest">
+    <wsdl:part element="impl:deleteStandingDataTypeRequest" name="deleteStandingDataTypeRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="deleteStandingDataTypeResponse">
+    <wsdl:part element="impl:deleteStandingDataTypeResponse" name="deleteStandingDataTypeResponse" />
+  </wsdl:message>
+
+    <wsdl:message name="createStandingDataRequest">
+    <wsdl:part element="impl:createStandingDataRequest" name="createStandingDataRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="createStandingDataResponse">
+    <wsdl:part element="impl:createStandingDataResponse" name="createStandingDataResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="updateStandingDataRequest">
+    <wsdl:part element="impl:updateStandingDataRequest" name="updateStandingDataRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="updateStandingDataResponse">
+    <wsdl:part element="impl:updateStandingDataResponse" name="updateStandingDataResponse" />
+  </wsdl:message>
+
+  <wsdl:message name="deleteStandingDataRequest">
+    <wsdl:part element="impl:deleteStandingDataRequest" name="deleteStandingDataRequest" />
+  </wsdl:message>
+
+  <wsdl:message name="deleteStandingDataResponse">
+    <wsdl:part element="impl:deleteStandingDataResponse" name="deleteStandingDataResponse" />
+  </wsdl:message>
+
+  <wsdl:portType name="WorkOrders_PortType">
+    <wsdl:operation name="createWO">
+      <wsdl:input message="impl:createWORequest" name="createWORequest" />
+      <wsdl:output message="impl:createWOResponse" name="createWOResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateWO">
+      <wsdl:input message="impl:updateWORequest" name="updateWORequest" />
+      <wsdl:output message="impl:updateWOResponse" name="updateWOResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteWO">
+      <wsdl:input message="impl:deleteWORequest" name="deleteWORequest" />
+      <wsdl:output message="impl:deleteWOResponse" name="deleteWOResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createStandingDataType">
+      <wsdl:input message="impl:createStandingDataTypeRequest" name="createStandingDataTypeRequest" />
+      <wsdl:output message="impl:createStandingDataTypeResponse" name="createStandingDataTypeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateStandingDataType">
+      <wsdl:input message="impl:updateStandingDataTypeRequest" name="updateStandingDataTypeRequest" />
+      <wsdl:output message="impl:updateStandingDataTypeResponse" name="updateStandingDataTypeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteStandingDataType">
+      <wsdl:input message="impl:deleteStandingDataTypeRequest" name="deleteStandingDataTypeRequest" />
+      <wsdl:output message="impl:deleteStandingDataTypeResponse" name="deleteStandingDataTypeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="createStandingData">
+      <wsdl:input message="impl:createStandingDataRequest" name="createStandingDataRequest" />
+      <wsdl:output message="impl:createStandingDataResponse" name="createStandingDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateStandingData">
+      <wsdl:input message="impl:updateStandingDataRequest" name="updateStandingDataRequest" />
+      <wsdl:output message="impl:updateStandingDataResponse" name="updateStandingDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteStandingData">
+      <wsdl:input message="impl:deleteStandingDataRequest" name="deleteStandingDataRequest" />
+      <wsdl:output message="impl:deleteStandingDataResponse" name="deleteStandingDataResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="WordOrders_Binding"  type="tns:WorkOrders_PortType" >
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="createWO"> 
+      <wsdl:input name="createWORequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createWOResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateWO"> 
+      <wsdl:input name="updateWORequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateWOResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteWO"> 
+      <wsdl:input name="deleteWORequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteWOResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createStandingDataType"> 
+      <wsdl:input name="createStandingDataTypeRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createStandingDataTypeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateStandingDataType"> 
+      <wsdl:input name="updateStandingDataTypeRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateStandingDataTypeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteStandingDataType"> 
+      <wsdl:input name="deleteStandingDataTypeRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteStandingDataTypeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createStandingData"> 
+      <wsdl:input name="createStandingDataRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createStandingDataResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateStandingData"> 
+      <wsdl:input name="updateStandingDataRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateStandingDataResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteStandingData"> 
+      <wsdl:input name="deleteStandingDataRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteStandingDataResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="WOService">
+    <wsdl:port binding="impl:WordOrders_Binding"
+      name="WordOrders">
+      <soap:address location="http://127.0.0.1:8001/ws/DataManager" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

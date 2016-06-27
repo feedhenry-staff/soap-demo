@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gbc="urn:common.ws.globalbay.com" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:common.ws.globalbay.com">
+    <xsd:complexType name="Credentials">
+        <xsd:sequence>
+            <xsd:element name="username" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="Credentials" type="gbc:Credentials"/>
+    <xsd:element name="SessionId" type="xsd:string"/>
+    <xsd:simpleType name="ObjectId">
+        <xsd:restriction base="xsd:string"/>
+    </xsd:simpleType>
+    <xsd:simpleType name="DataType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BINARY"/>
+            <xsd:enumeration value="BOOLEAN"/>
+            <xsd:enumeration value="DATE"/>
+            <xsd:enumeration value="DECIMALNUMBER"/>
+            <xsd:enumeration value="IMAGE"/>
+            <xsd:enumeration value="INTEGERNUMBER"/>
+            <xsd:enumeration value="MULTICHOICE"/>
+            <xsd:enumeration value="SINGLECHOICE"/>
+            <xsd:enumeration value="TEXT"/>
+            <xsd:enumeration value="TIME"/>
+            <xsd:enumeration value="TIMESTAMP"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="BinaryValue">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="xsd:string"/>
+            <xsd:element name="data" type="xsd:base64Binary"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ChoiceValue">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="text" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ChoiceValueList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="choiceValue" type="gbc:ChoiceValue"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="MixedValue">
+        <xsd:choice>
+            <xsd:element name="base64Value" type="xsd:base64Binary"/>
+            <xsd:element name="binaryValue" type="gbc:BinaryValue"/>
+            <xsd:element name="booleanValue" type="xsd:boolean"/>
+            <xsd:element name="dateValue" type="xsd:date"/>
+            <xsd:element name="dateTimeValue" type="xsd:dateTime"/>
+            <xsd:element name="doubleValue" type="xsd:double"/>
+            <xsd:element name="intValue" type="xsd:int"/>
+            <xsd:element name="multiChoiceValue" type="gbc:ChoiceValueList"/>
+            <xsd:element name="singleChoiceValue" type="gbc:ChoiceValue"/>
+            <xsd:element name="stringValue" type="xsd:string"/>
+            <xsd:element name="timeValue" type="xsd:time"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="UserInfo">
+        <xsd:sequence>
+            <xsd:element name="userId" nillable="true" type="gbc:ObjectId"/>
+            <xsd:element name="username" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

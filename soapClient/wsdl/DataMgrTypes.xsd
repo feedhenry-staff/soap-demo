@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gbc="urn:common.ws.globalbay.com" xmlns:gbdt="urn:types.datamanager.ws.globalbay.com" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:types.datamanager.ws.globalbay.com">
+    <xsd:import namespace="urn:common.ws.globalbay.com" schemaLocation="Common.xsd"/>
+    <xsd:complexType name="RecordInfo">
+        <xsd:sequence>
+            <xsd:element name="recordId" type="gbc:ObjectId"/>
+            <xsd:element name="applicationId" type="gbc:ObjectId"/>
+            <xsd:element name="uploadedOn" type="xsd:dateTime"/>
+            <xsd:element name="createdOn" type="xsd:dateTime"/>
+            <xsd:element name="createdBy" type="gbc:UserInfo"/>
+            <xsd:element name="modifiedOn" nillable="true" type="xsd:dateTime"/>
+            <xsd:element name="modifiedBy" nillable="true" type="gbc:UserInfo"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TypedValue">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="gbc:DataType"/>
+            <xsd:element name="value" nillable="true" type="gbc:MixedValue"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TypedValueList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="entry" type="gbdt:TypedValue"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DatasetData">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="sequence" type="xsd:int"/>
+            <xsd:element name="entryList" type="gbdt:TypedValueList"/>
+            <xsd:element name="datasetList" type="gbdt:DatasetDataList"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DatasetDataList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="dataset" type="gbdt:DatasetData"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RecordData">
+        <xsd:sequence>
+            <xsd:element name="rootDataset" type="gbdt:DatasetData"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Record">
+        <xsd:sequence>
+            <xsd:element name="recordInfo" type="gbdt:RecordInfo"/>
+            <xsd:element name="recordData" type="gbdt:RecordData"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RecordList">
+        <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="records" type="gbdt:Record"/>
+            <xsd:element name="total" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TableVariableValue">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="type" type="gbc:DataType"/>
+            <xsd:element name="value" nillable="true" type="gbc:MixedValue"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TableVariableRowHeader">
+        <xsd:sequence>
+            <xsd:element name="rowId" nillable="true" type="gbc:ObjectId"/>
+            <xsd:element name="timestamp" nillable="true" type="xsd:long"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TableVariableRow">
+        <xsd:complexContent>
+            <xsd:extension base="gbdt:TableVariableRowHeader">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="valueList" type="gbdt:TypedValue"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+</xsd:schema>
