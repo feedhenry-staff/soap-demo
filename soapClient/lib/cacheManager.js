@@ -24,6 +24,7 @@ function loadCache(cb){
 				  "act": "save",
 				  "key": "categories", // The key associated with the object
 				  "value": JSON.stringify(data), // The value to be cached, must be serializable
+				  "expire": 10 * 60 // Expires in 10 x 60 seconds
 				};
 				mbaasApi.cache(options, function (err, res) {
 				  if (err) {
@@ -39,7 +40,7 @@ function loadCache(cb){
 	);
 }
 
-exports.getCategories = function(cb){
+function getCategories(cb){
 	var options = {
 	  "act": "load",
 	  "key": "categories" // key to look for in cache
@@ -47,9 +48,19 @@ exports.getCategories = function(cb){
 	mbaasApi.cache(options, function (err, res) {
 	  if (err) {
 	  	cb(err, null)
-	  } else {
+	  } else if (res){
 	  	cb(null, JSON.parse(res))
+	  } else {
+	  	console.log('Cache empty, reloading')
+	  	loadCache(function(err, loadCacheRes){
+	  		if (err){
+	  			cb(err, null)
+	  		} else {
+	  			getCategories(cb);
+	  		}
+	  	});
 	  }
 	});
 }
 exports.init = init;
+exports.getCategories = getCategories;
