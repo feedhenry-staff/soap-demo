@@ -21,9 +21,7 @@ remoteServices.init(function(err, client){
 
 // list the endpoints which you want to make securable here
 var securableEndpoints;
-// fhlint-begin: securable-endpoints
-securableEndpoints = ['/hello'];
-// fhlint-end
+
 
 var app = express();
 
