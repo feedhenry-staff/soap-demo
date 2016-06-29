@@ -12,3 +12,11 @@ The provided wsdl is very simple, it exposes a single method, getCategories
 To test this with soapUI,create a new SOAP project.
 
 ![alt text](./soapServer/screenshots/newProject.png "New project creation")
+
+From the new project, navigate to dataDictionary_Binding -> getCategories -> Request 1
+
+![alt text](./soapServer/screenshots/sampleRequest.png "Sample Request")
+
+Click on the green play button, you should see the following response
+
+![alt text](./soapServer/screenshots/sampleResponse.png "Sample Response")
